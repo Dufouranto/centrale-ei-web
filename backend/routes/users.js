@@ -1,4 +1,5 @@
 const express = require("express");
+const MovieModel = require("../models/movies");
 const RecommandationModel = require("../models/recommandation");
 const UserModel = require("../models/user");
 const router = express.Router();
@@ -10,16 +11,14 @@ router.get("/", function (req, res) {
 });
 
 router.get("/:id/movies", async function (req, res) {
-  const filter = { _id: req.params["id"] };
-  const user = await RecommandationModel.find({
-    userid: filter,
-  })
-    .populate("movieid")
-    .sort({ scoreId: -1 });
+  const user = await UserModel.findById(req.params.id)
+    .populate("Recommandation")
+    .sort({ score: -1 });
   res.send(user);
 });
 
 router.post("/:userId/:movieId", async function (req, res) {
+  console.log(req.body)
   const newRecommandation = new RecommandationModel({
     userId: req.params.userId,
     movieId: req.params.movieId,
