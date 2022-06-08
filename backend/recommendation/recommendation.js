@@ -1,5 +1,9 @@
 import axios from "axios";
 
+
+for movie_id of genre_ids:
+    movies_reco
+
 export default {
   name: "Recommendation",
   data: function () {
@@ -15,7 +19,6 @@ export default {
         )
         .then((response) => {
           this.movies_reco = response.data.results;
-          console.log(movies_reco)
         })
         .catch((error) => {
           console.error(error);
