@@ -30,9 +30,31 @@
 """
 
 
-def similar_movies(movie_id):
+def recommandation(user_id):
+    # Get the database using the method we defined in pymongo_test_insert file
+    from pymongo_test import get_database
+
+    dbname = get_database()
+
+    # Create a new collection
+    collection_name = dbname["movies"]
+
+    item_details = collection_name.find()
+    for item in item_details:
+        # This does not give a very readable output
+        print(item)
+
+    # Get all the ids of the films the user watched
+
+    # Find the genre_ids of these films
+
+    # Sort the genres according to there occurences
+
+    # Return a list of film ids for each genre
     return None
 
+
+recommandation(15845)
 
 # GET/movie/{movie_id}/similar
 # Get a list of similar movies. This is not the same as the "Recommendation" system you see on the website.
