@@ -1,4 +1,5 @@
 const express = require("express");
+const RecommandationModel = require("../models/recommandation");
 const UserModel = require("../models/user");
 const router = express.Router();
 
@@ -10,10 +11,24 @@ router.get("/", function (req, res) {
 
 router.get("/:id/movies", async function (req, res) {
   const filter = { _id: req.params["id"] };
-  const user = await UserModel.findOne({
-    _id: filter,
-  }).populate("watchedMovies");
+  const user = await RecommandationModel.find({
+    userid: filter,
+  })
+    .populate("movieid")
+    .sort({ scoreId: -1 });
   res.send(user);
+});
+
+router.post("/:id/:movieId", async function (req, res) {
+  const newRecommandation = new RecommandationModel({
+    userId: req.body.userId,
+    movieId: req.body.movieId,
+    score: req.body.score,
+  });
+
+  newRecommandation.save().then(function (newRecommandation) {
+    res.status(201).json(newRecommandation);
+  });
 });
 
 router.post("/new", function (req, res) {
