@@ -14,8 +14,8 @@ const RecommandationSchema = new mongoose.Schema(
 
 RecommandationSchema.virtual("RecommandedMovies", {
   ref: "MovieModel",
-  localField: "_id", // The user _id should match the viewers field in movies
-  foreignField: "viewers",
+  localField: "movieid", // The movie id should match the id field in movies
+  foreignField: "_id",
 });
 
 const RecommandationModel = mongoose.model(
