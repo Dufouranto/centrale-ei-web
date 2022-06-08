@@ -1,15 +1,18 @@
 const express = require("express");
+const LikeModel = require("../models/likes");
 // const MovieModel = require("../models/movies");
 const RecommandationModel = require("../models/recommandation");
 const UserModel = require("../models/user");
 const router = express.Router();
 
+// list all the users
 router.get("/", function (req, res) {
   UserModel.find({}).then(function (users) {
     res.json({ users: users });
   });
 });
 
+// List all recommanded movies sorted by decreasing rates
 router.get("/:id/movies", async function (req, res) {
   const user = await RecommandationModel.find({ userId: req.params.id })
     .populate("movieId")
@@ -17,19 +20,21 @@ router.get("/:id/movies", async function (req, res) {
   res.send(user);
 });
 
+//Add a recommandation manually (the recomandations should be all evaluated by the recom module)
 router.post("/:userId/:movieId", async function (req, res) {
   console.log(req.body);
-  const newRecommandation = new RecommandationModel({
+  const newLike = new LikeModel({
     userId: req.params.userId,
     movieId: req.params.movieId,
-    score: req.body.score,
+    mark: req.body.mark,
   });
 
-  await newRecommandation.save().then(function (newRecommandation) {
-    res.status(201).json(newRecommandation);
+  await newLike.save().then(function (newLike) {
+    res.status(201).json(newLike);
   });
 });
 
+//Create a new user
 router.post("/new", function (req, res) {
   const newUser = new UserModel({
     email: req.body.email,
@@ -54,6 +59,7 @@ router.post("/new", function (req, res) {
     });
 });
 
+//Delete a user
 router.delete("/:userId", function (req, res) {
   UserModel.deleteOne({ _id: req.params.userId })
     .then(function () {

@@ -21,6 +21,10 @@ async function populateMovies(movies) {
     const newMovie = new MovieModel({
       title: movie.original_title,
       desc: movie.overview,
+      popularity: movie.popularity,
+      genre_ids: movie.genre_ids,
+      release_date: movie.release_date,
+      poster_path: movie.poster_path,
     });
     await newMovie.save();
   }

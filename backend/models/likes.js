@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const LikeSchema = new mongoose.Schema(
   {
-    userid: { type: mongoose.Schema.Types.ObjectId, required: true },
-    movieid: { type: mongoose.Schema.Types.ObjectId },
+    userId: { type: mongoose.Schema.Types.ObjectId, required: true },
+    movieId: { type: mongoose.Schema.Types.ObjectId },
     mark: { type: Number },
   },
   {
@@ -12,11 +12,11 @@ const LikeSchema = new mongoose.Schema(
   }
 );
 
-LikeSchema.virtual("LikedMovies", {
-  ref: "MovieModel",
-  localField: "_id", // The user _id should match the viewers field in movies
-  foreignField: "viewers",
-});
+// LikeSchema.virtual("LikedMovies", {
+//   ref: "MovieModel",
+//   localField: "_id", // The user _id should match the viewers field in movies
+//   foreignField: "",
+// });
 
 const LikeModel = mongoose.model("LikeModel", LikeSchema, "likes");
 
