@@ -19,14 +19,14 @@ router.get("/:id/movies", async function (req, res) {
   res.send(user);
 });
 
-router.post("/:id/:movieId", async function (req, res) {
+router.post("/:userId/:movieId", async function (req, res) {
   const newRecommandation = new RecommandationModel({
-    userId: req.body.userId,
-    movieId: req.body.movieId,
+    userId: req.params.userId,
+    movieId: req.params.movieId,
     score: req.body.score,
   });
 
-  newRecommandation.save().then(function (newRecommandation) {
+  await newRecommandation.save().then(function (newRecommandation) {
     res.status(201).json(newRecommandation);
   });
 });
