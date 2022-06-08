@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const LikeSchema = new mongoose.Schema(
   {
-    userid: { type: Number, required: true },
-    movieid: { type: String },
+    userid: { type: mongoose.Schema.Types.ObjectId, required: true },
+    movieid: { type: mongoose.Schema.Types.ObjectId },
     mark: { type: Number },
   },
   {
