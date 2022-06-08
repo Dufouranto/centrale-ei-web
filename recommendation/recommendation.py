@@ -3,7 +3,7 @@
 # 0: 14
 # 1: 12
 # 2: 28
-
+"""
 {
     "genres": [
         {"id": 28, "name": "Action"},
@@ -27,6 +27,11 @@
         {"id": 37, "name": "Western"},
     ]
 }
+"""
+
+
+def similar_movies(movie_id):
+    return None
 
 
 # GET/movie/{movie_id}/similar
