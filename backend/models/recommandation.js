@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const RecommandationSchema = new mongoose.Schema(
   {
-    userid: { type: Number, required: true },
-    movieid: { type: String },
+    userId: { type: mongoose.Schema.Types.ObjectId, required: true },
+    movieId: { type: mongoose.Schema.Types.ObjectId },
     score: { type: Number },
   },
   {
