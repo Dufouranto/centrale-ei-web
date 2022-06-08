@@ -1,15 +1,16 @@
-def get_database():
-    from pymongo import MongoClient
+from pymongo import MongoClient
+import certifi
 
-    # Provide the mongodb atlas url to connect python to mongodb using pymongo
+
+def get_database():
+
     CONNECTION_STRING = (
         "mongodb://group13:E65yVXRJ74tzNPjU@cs2022.lmichelin.fr:27017/group13?ssl=true"
     )
 
-    # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
-    from pymongo import MongoClient
+    client = MongoClient(CONNECTION_STRING, tlsCAFile=certifi.where())
 
-    client = MongoClient(CONNECTION_STRING)
+    return client["group13"]
 
 
 # This is added so that many files can reuse the function get_database()

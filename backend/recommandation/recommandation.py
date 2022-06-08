@@ -30,19 +30,23 @@
 """
 
 
+from operator import itemgetter
+from pymongo_test import get_database
+
+
 def recommandation(user_id):
     # Get the database using the method we defined in pymongo_test_insert file
-    from pymongo_test import get_database
-
     dbname = get_database()
 
-    # Create a new collection
+    # Connexion to the collection movies
     collection_name = dbname["movies"]
-
-    item_details = collection_name.find()
-    for item in item_details:
-        # This does not give a very readable output
-        print(item)
+    
+    item_1 = {"www": "kdjbv", "category": "iub", "food": "kiuh"}
+    collection_name.insert_one(item_1)
+    # item_details = collection_name.find()
+    # for item in item_details:
+    # This does not give a very readable output
+    # print(item)
 
     # Get all the ids of the films the user watched
 
