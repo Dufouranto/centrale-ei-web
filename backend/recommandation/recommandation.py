@@ -32,21 +32,50 @@
 
 from operator import itemgetter
 from pymongo_test import get_database
+import numpy as np
+import pandas as pd
+
+# Likes Table
+likes_cols = ["userId", "movieId", "mark"]
+
+# Movies Table
+movies_cols = [
+    "title",
+    "desc",
+    "url",
+    "popularity",
+    "genre_ids",
+    "release_date",
+    "poster_path",
+]
+# Recommandation Table
+recommandation_cols = ["userId", "movieId", "score"]
+
+# Users Table
+users_cols = ["email", "firstName", "lastName"]
 
 
 def recommandation(user_id):
     # Get the database using the method we defined in pymongo_test_insert file
     dbname = get_database()
 
-    # Connexion to the collection movies
-    collection_name = dbname["movies"]
-    
-    item_1 = {"www": "kdjbv", "category": "iub", "food": "kiuh"}
-    collection_name.insert_one(item_1)
-    # item_details = collection_name.find()
-    # for item in item_details:
-    # This does not give a very readable output
-    # print(item)
+    L = []
+    for i in ["likes", "movies", "recommandations", "users"]:
+        # Connexion to the collection movies
+        collection_i = dbname[i]
+
+        cursor_i = collection_i.find()
+
+        # Expand the cursor and construct the DataFrame
+        L.append(pd.DataFrame(list(cursor_i)))
+
+    likes, movies, recommandations, users = L
+
+    nb_users = users.email.unique().shape[0]
+    nb_items = movies.title.unique().shape[0]
+
+    print("Number of users : ", nb_users)
+    print("Number of movies : ", nb_items)
 
     # Get all the ids of the films the user watched
 
