@@ -25,16 +25,23 @@ export default {
     return {
       movieName: "",
       movies: [],
+      string: "",
     };
   },
   methods: {
     fetchMovies: function () {
+      if (this.movieName == "") {
+        this.string = `https://api.themoviedb.org/3/trending/movie/week?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&`;
+        console.log("check");
+      } else {
+        this.string =
+          `https://api.themoviedb.org/3/search/movie?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&query=` +
+          this.movieName;
+      }
       axios
-        .get(
-          `https://api.themoviedb.org/3/trending/movie/week?api_key=a0a7e40dc8162ed7e37aa2fc97db5654`
-        )
+        .get(this.string)
         .then((response) => {
-          //console.log(response.data.results[0]["original_title"]);
+          console.log(response);
           this.movies = response.data.results;
         })
         .catch((error) => {
@@ -43,6 +50,9 @@ export default {
     },
   },
   mounted: function () {
+    this.fetchMovies();
+  },
+  updated: function () {
     this.fetchMovies();
   },
   components: { Movie },
