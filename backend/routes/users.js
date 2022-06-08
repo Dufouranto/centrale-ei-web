@@ -8,6 +8,14 @@ router.get("/", function (req, res) {
   });
 });
 
+router.get("/:id/movies", async function (req, res) {
+  const filter = { _id: req.params["id"] };
+  const user = await UserModel.findOne({
+    _id: filter,
+  }).populate("watchedMovies");
+  res.send(user);
+});
+
 router.post("/new", function (req, res) {
   const newUser = new UserModel({
     email: req.body.email,
