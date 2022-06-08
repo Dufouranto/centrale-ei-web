@@ -21,7 +21,7 @@ router.post("/new", async function (req, res) {
       viewers: req.body.viewers,
     });
 
-    const createdMovie = await newMovie.save();
+    await newMovie.save();
 
     // What to do after the movie was saved
   } catch (error) {

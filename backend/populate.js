@@ -10,7 +10,7 @@ async function fetchMoviesFromTheMovieDatabase() {
     );
     for (let movie of res.data.results) {
       moviesList.push(movie);
-      console.log(movie)
+      console.log(movie);
     }
   }
   return moviesList;
@@ -22,12 +22,12 @@ async function populateMovies(movies) {
       title: movie.original_title,
       desc: movie.overview,
     });
-    const createdMovie = await newMovie.save();
+    await newMovie.save();
   }
 }
 
 async function dropDataBase() {
-  let deletedMovies = await MovieModel.deleteMany({});
+  await MovieModel.deleteMany({});
 }
 
 async function populate() {
