@@ -34,7 +34,7 @@ export default {
           `https://api.themoviedb.org/3/trending/movie/week?api_key=a0a7e40dc8162ed7e37aa2fc97db5654`
         )
         .then((response) => {
-          //console.log(response.data.results[0]["original_title"]);
+          console.log(response.data.results);
           this.movies = response.data.results;
         })
         .catch((error) => {
