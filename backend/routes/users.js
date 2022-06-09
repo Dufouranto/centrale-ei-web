@@ -20,7 +20,7 @@ router.get("/:id/movies", async function (req, res) {
   res.send(user);
 });
 
-//Add a recommandation manually (the recomandations should be all evaluated by the recom module)
+//Add a like (a mark between 0 and 5, 0 for dislike)
 router.post("/:userId/:movieId", async function (req, res) {
   console.log(req.body);
   const newLike = new LikeModel({
