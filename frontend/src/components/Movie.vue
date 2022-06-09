@@ -1,5 +1,5 @@
 <template>
-  <div class="movie">
+  <div class="movie" v-if="movieProp.poster_path != null">
     <router-link :to="`/movie/${movieProp.id}`">
       <img
         class="poster"
@@ -8,7 +8,10 @@
     </router-link>
     <div>{{ movieProp.title }}</div>
     <div></div>
-    <div>{{ ConvertDate(movieProp.release_date) }}</div>
+    <div style="font-size: x-small">
+      {{ ConvertDate(movieProp.release_date) }} -
+      {{ movieProp.vote_average }}/10
+    </div>
   </div>
 </template>
 

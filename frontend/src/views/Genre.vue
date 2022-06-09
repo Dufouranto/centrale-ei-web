@@ -3,7 +3,7 @@
     <h1>Film du genre {{ genre }}</h1>
 
     <div class="movies">
-      <Movie v-for="movie in movies" :movieProp="movie" />
+      <Movie v-for="movie in movies" :movieProp="movie" :key="movie.id" />
     </div>
   </div>
 </template>

@@ -2,15 +2,14 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <h1>Notre super site de films</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br />
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank">vue-cli documentation</a>.
-    </p>
-    <p>Votre recherche: {{ movieName }}</p>
-    <input v-model="movieName" placeholder="Rentrez le nom d'un film" />
+    <input
+      v-model="movieName"
+      @keyup.enter="fetchMovies"
+      placeholder="Rentrez le nom d'un film"
+    />
+    <br /><br />
     <div class="movies">
-      <Movie v-for="movie in movies" :movieProp="movie" />
+      <Movie v-for="movie in movies" :movieProp="movie" :key="movie.id" />
     </div>
   </div>
 </template>
@@ -50,9 +49,6 @@ export default {
     },
   },
   mounted: function () {
-    this.fetchMovies();
-  },
-  updated: function () {
     this.fetchMovies();
   },
   components: { Movie },

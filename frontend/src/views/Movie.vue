@@ -5,11 +5,14 @@
   <p></p>
   <div class="poster">
     <img
+      v-if="movie.poster_path != null"
       class="image"
       :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
     />
+    <img v-else class="image" src="" />
     <h1>{{ this.movie.title }}</h1>
-    Genre: <Genre v-for="genre in movie.genres" :movieProp="genre" />
+    Genre:
+    <Genre v-for="genre in movie.genres" :movieProp="genre" :key="genre.id" />
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     Movie ID of {{ this.movie.title }} is {{ $route.params.id }}
     <br /><br /><br />
