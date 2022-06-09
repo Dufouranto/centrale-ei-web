@@ -1,7 +1,6 @@
 <template>
   <div class="nav">
     <router-link class="nav-link" to="/">Home</router-link> |
-    <router-link class="nav-link" to="/counter">Counter</router-link> |
     <router-link class="nav-link" to="/users">Users</router-link> |
     <router-link class="nav-link" to="/about">About</router-link>
   </div>
@@ -10,16 +9,19 @@
 
 <style scoped>
 .nav {
+  font-family: 'Fredoka One', cursive;
+  font-size: 32px;
   text-align: center;
   padding: 30px;
 }
 
 .nav-link {
-  font-weight: bold;
-  color: #2c3e50;
+  color: #020c0f;
+  padding: 20px;
+  text-decoration: none;
 }
 
 .nav-link.router-link-exact-active {
-  color: #42b983;
+  color: #ffffff;
 }
 </style>
