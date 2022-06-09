@@ -1,8 +1,6 @@
 # On va s'interesser ici au genre des films, que l'on retrouve dans genre_ids.
 # genre_ids: Array(3)
-# 0: 14
-# 1: 12
-# 2: 28
+
 """
 {
     "genres": [
@@ -56,7 +54,7 @@ recommandation_cols = ["userId", "movieId", "score"]
 users_cols = ["email", "firstName", "lastName"]
 
 
-def recommandation(user_id):
+def recommandation_similar():
     # Get the database using the method we defined in pymongo_test_insert file
     dbname = get_database()
 
@@ -102,8 +100,18 @@ def recommandation(user_id):
 
     print("user_similarity")
     print(user_similarity)
-    # Get all the ids of the films the user watched
 
+
+def recommandation_simple(user_id):
+    # Get all the ids of the films the user noted
+
+    dbname = get_database()
+
+    collection_likes = dbname["likes"]
+
+    movies_noted = collection_likes.find({"userId": user_id})
+
+    print(movies_noted)
     # Find the genre_ids of these films
 
     # Sort the genres according to there occurences
@@ -112,7 +120,7 @@ def recommandation(user_id):
     return None
 
 
-recommandation(15845)
+recommandation_simple(15845)
 
 # GET/movie/{movie_id}/similar
 # Get a list of similar movies. This is not the same as the "Recommendation" system you see on the website.
