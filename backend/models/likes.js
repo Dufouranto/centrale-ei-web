@@ -12,11 +12,11 @@ const LikeSchema = new mongoose.Schema(
   }
 );
 
-LikeSchema.virtual("LikedMovies", {
-  ref: "MovieModel",
-  localField: "_id", // The user _id should match the viewers field in movies
-  foreignField: "viewers",
-});
+// LikeSchema.virtual("LikedMovies", {
+//   ref: "MovieModel",
+//   localField: "_id", // The user _id should match the viewers field in movies
+//   foreignField: "",
+// });
 
 const LikeModel = mongoose.model("LikeModel", LikeSchema, "likes");
 

@@ -12,10 +12,10 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-UserSchema.virtual("watchedMovies", {
-  ref: "MovieModel",
+UserSchema.virtual("Recommandation", {
+  ref: "RecommandationModel",
   localField: "_id", // The user _id should match the viewers field in movies
-  foreignField: "viewers",
+  foreignField: "UserId",
 });
 
 const UserModel = mongoose.model("UserModel", UserSchema, "users");

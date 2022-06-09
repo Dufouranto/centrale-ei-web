@@ -2,9 +2,13 @@ const mongoose = require("mongoose");
 
 const RecommandationSchema = new mongoose.Schema(
   {
-    userId: { type: mongoose.Schema.Types.ObjectId, required: true },
-    movieId: { type: mongoose.Schema.Types.ObjectId },
-    score: { type: Number },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "UserModel",
+      required: true,
+    },
+    movieId: { type: mongoose.Schema.Types.ObjectId, ref: "MovieModel" },
+    score: { type: Number, required: true },
   },
   {
     toJSON: { virtuals: true }, // So `res.json()` and other `JSON.stringify()` functions include virtuals
@@ -12,11 +16,11 @@ const RecommandationSchema = new mongoose.Schema(
   }
 );
 
-RecommandationSchema.virtual("RecommandedMovies", {
-  ref: "MovieModel",
-  localField: "movieid", // The movie id should match the id field in movies
-  foreignField: "_id",
-});
+// RecommandationSchema.virtual("RecommandedMovies", {
+//   ref: "MovieModel",
+//   localField: "movieId", // The movie id should match the id field in movies
+//   foreignField: "_id",
+// });
 
 const RecommandationModel = mongoose.model(
   "RecommandationModel",

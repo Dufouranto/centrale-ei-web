@@ -1,21 +1,40 @@
 const express = require("express");
+const LikeModel = require("../models/likes");
+// const MovieModel = require("../models/movies");
+const RecommandationModel = require("../models/recommandation");
 const UserModel = require("../models/user");
 const router = express.Router();
 
+// list all the users
 router.get("/", function (req, res) {
   UserModel.find({}).then(function (users) {
     res.json({ users: users });
   });
 });
 
+// List all recommanded movies sorted by decreasing rates
 router.get("/:id/movies", async function (req, res) {
-  const filter = { _id: req.params["id"] };
-  const user = await UserModel.findOne({
-    _id: filter,
-  }).populate("watchedMovies");
+  const user = await RecommandationModel.find({ userId: req.params.id })
+    .populate("movieId")
+    .sort({ score: -1 });
   res.send(user);
 });
 
+//Add a like (a mark between 0 and 5, 0 for dislike)
+router.post("/:userId/:movieId", async function (req, res) {
+  console.log(req.body);
+  const newLike = new LikeModel({
+    userId: req.params.userId,
+    movieId: req.params.movieId,
+    mark: req.body.mark,
+  });
+
+  await newLike.save().then(function (newLike) {
+    res.status(201).json(newLike);
+  });
+});
+
+//Create a new user
 router.post("/new", function (req, res) {
   const newUser = new UserModel({
     email: req.body.email,
@@ -40,6 +59,7 @@ router.post("/new", function (req, res) {
     });
 });
 
+//Delete a user
 router.delete("/:userId", function (req, res) {
   UserModel.deleteOne({ _id: req.params.userId })
     .then(function () {

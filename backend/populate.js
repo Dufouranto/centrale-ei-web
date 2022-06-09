@@ -3,10 +3,17 @@ const MovieModel = require("./models/movies");
 const axios = require("axios");
 
 async function fetchMoviesFromTheMovieDatabase() {
-  const res = await axios.get(
-    "https://api.themoviedb.org/3/movie/popular?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&language=fr-FR&page=1"
-  );
-  return res.data.results;
+  let moviesList = [];
+  for (let i = 1; i <= 4; i++) {
+    const res = await axios.get(
+      `https://api.themoviedb.org/3/movie/popular?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&language=fr-FR&page=${i}`
+    );
+    for (let movie of res.data.results) {
+      moviesList.push(movie);
+      console.log(movie);
+    }
+  }
+  return moviesList;
 }
 
 async function populateMovies(movies) {
@@ -14,13 +21,17 @@ async function populateMovies(movies) {
     const newMovie = new MovieModel({
       title: movie.original_title,
       desc: movie.overview,
+      popularity: movie.popularity,
+      genre_ids: movie.genre_ids,
+      release_date: movie.release_date,
+      poster_path: movie.poster_path,
     });
-    const createdMovie = await newMovie.save();
+    await newMovie.save();
   }
 }
 
 async function dropDataBase() {
-  let deletedMovies = await MovieModel.deleteMany({});
+  await MovieModel.deleteMany({});
 }
 
 async function populate() {

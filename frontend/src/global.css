@@ -1,3 +1,9 @@
+html {
+  background-color: #e48669;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  width: 1300px;
+  margin: auto;
 }
