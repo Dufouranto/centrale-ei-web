@@ -57,7 +57,12 @@ export default {
           `https://api.themoviedb.org/3/genre/movie/list?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&`
         )
         .then((response) => {
+<<<<<<< HEAD
           this.genres = response.data.genres;
+=======
+          console.log(response.data.results);
+          this.movies = response.data.results;
+>>>>>>> origin/Antoine
         })
         .catch((error) => {
           console.error(error);

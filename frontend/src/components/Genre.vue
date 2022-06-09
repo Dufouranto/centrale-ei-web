@@ -4,7 +4,7 @@
       {{ movieProp.name }}
     </button>
   </router-link>
-  &nbsp
+  &nbsp;
 </template>
 
 <script>
