@@ -1,8 +1,9 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <img alt="Vue logo" src="../assets/logo_remoov.png" />
     <h1>Notre super site de films</h1>
     <input
+      id="search_bar"
       v-model="movieName"
       @keyup.enter="fetchMovies"
       placeholder="Rentrez le nom d'un film"
