@@ -9,10 +9,8 @@
       class="image"
       :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
     />
-    <h1>{{ this.movie.title }}</h1>
+    <h1>{{ this.movie.original_title }}</h1>
     <Genre v-for="genre in movie.genres" :movieProp="genre" :key="genre.id" /> •
-    &nbsp; {{ min_to_hours(this.movie.runtime) }} <br /><br />
-    Rating : {{ this.movie.vote_average }}/10 <br /><br />
     Your mark:
     <input
       type="range"
@@ -40,7 +38,7 @@ export default {
       movie: {},
       link: "",
       genre: {},
-      image: image,
+      // image: image,
       value: 0,
       hours: 0,
       minuts: 0,
@@ -48,8 +46,7 @@ export default {
   },
   methods: {
     fetchMovie: function (id) {
-      this.link =
-        `http://localhost/${id}`
+      this.link = `http://localhost:3000/movies/${id}`;
       axios
         .get(this.link)
         .then((response) => {

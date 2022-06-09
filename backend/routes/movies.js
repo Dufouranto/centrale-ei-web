@@ -7,7 +7,10 @@ module.exports = router;
 //List all the movies
 router.get("/", async function (req, res) {
   // find each film, selecting the `title` field
-  const listFilm = await MovieModel.find({}, "title poster_path");
+  const listFilm = await MovieModel.find(
+    {},
+    "original_title poster_path release_date"
+  );
   res.send(listFilm);
 });
 
@@ -45,5 +48,10 @@ router.put("/:id", async function (req, res) {
   let movie = await MovieModel.findOneAndUpdate(filter, update, {
     new: true,
   });
+  res.send(movie);
+});
+
+router.get("/:id", async function (req, res) {
+  const movie = await MovieModel.findById(req.params.id);
   res.send(movie);
 });
