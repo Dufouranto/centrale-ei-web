@@ -53,9 +53,12 @@ export default {
     },
     fetchGenre: function () {
       axios
-        .get(`http://localhost:3000/movies/`)
+        .get(
+          `https://api.themoviedb.org/3/genre/movie/list?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&`
+        )
         .then((response) => {
           this.genres = response.data.genres;
+          console.log(this.genres);
         })
         .catch((error) => {
           console.error(error);
@@ -74,7 +77,7 @@ export default {
 <style scoped>
 .home {
   text-align: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 h3 {
@@ -100,7 +103,8 @@ a {
   flex-wrap: wrap;
   gap: 10px;
   padding: 15px 5px 0 15px;
-  box-shadow:  0px 0px 20px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0px 0px 20px 0 rgba(0, 0, 0, 0.5),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
   /* background-color: white; */
 }
 

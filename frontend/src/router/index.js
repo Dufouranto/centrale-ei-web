@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Users from "../views/Users.vue";
 import About from "../views/About.vue";
 import Genre from "../views/Genre.vue";
+import Movie from "../views/Movie.vue";
 
 const routes = [
   {
@@ -20,6 +21,16 @@ const routes = [
     path: "/about",
     name: "About",
     component: About,
+  },
+  {
+    path: "/movie/:id",
+    name: "Movie",
+    component: Movie,
+  },
+  {
+    path: "/genre/:id",
+    name: "Genre",
+    component: Genre,
   },
 ];
 
