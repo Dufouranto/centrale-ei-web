@@ -1,5 +1,6 @@
 .DS_Store
 node_modules
+backend/recommandation/__pycache__
 
 # local env files
 .env
