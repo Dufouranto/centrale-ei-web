@@ -32,7 +32,6 @@
 <script>
 import axios from "axios";
 import Genre from "@/components/Genre.vue";
-import image from "./no poster.png";
 
 export default {
   name: "MoviePage",
@@ -50,9 +49,7 @@ export default {
   methods: {
     fetchMovie: function (id) {
       this.link =
-        "https://api.themoviedb.org/3/movie/" +
-        id +
-        "?api_key=a0a7e40dc8162ed7e37aa2fc97db5654";
+        `http://localhost/${id}`
       axios
         .get(this.link)
         .then((response) => {
