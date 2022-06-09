@@ -4,7 +4,7 @@ const axios = require("axios");
 
 async function fetchMoviesFromTheMovieDatabase() {
   let moviesList = [];
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i <= 5; i++) {
     const res = await axios.get(
       `https://api.themoviedb.org/3/movie/popular?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&language=fr-FR&page=${i}`
     );
