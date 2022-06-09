@@ -8,7 +8,7 @@
       placeholder="Rentrez le nom d'un film"
     />
     <div>
-      Watch a specific genre:
+      <br />
       <Genre v-for="genre in genres" :movieProp="genre" :key="genre.id" />
     </div>
     <br /><br />
@@ -37,7 +37,6 @@ export default {
     fetchMovies: function () {
       if (this.movieName == "") {
         this.string = `https://api.themoviedb.org/3/trending/movie/week?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&`;
-        console.log("check");
       } else {
         this.string =
           `https://api.themoviedb.org/3/search/movie?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&query=` +
@@ -56,15 +55,11 @@ export default {
       axios
         .get(`http://localhost:3000/movies/`)
         .then((response) => {
-          console.log(response.data);
-          this.movies = response.data;
+          this.genres = response.data.genres;
         })
         .catch((error) => {
           console.error(error);
         });
-      console.log(this.genres);
-      console.log("tableau genre");
-      console.log(this.genres);
     },
   },
   mounted: function () {

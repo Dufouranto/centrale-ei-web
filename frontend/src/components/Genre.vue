@@ -1,6 +1,8 @@
 <template>
   <router-link :to="`/genre/${movieProp.id}`">
-    {{ movieProp.name }} salut
+    <button type="button">
+      {{ movieProp.name }}
+    </button>
   </router-link>
   &nbsp
 </template>
