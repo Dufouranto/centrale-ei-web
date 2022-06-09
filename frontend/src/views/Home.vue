@@ -1,18 +1,19 @@
 <template>
   <div class="home">
-    <div class="header">
-      <img alt="Vue logo" src="../assets/logo_remoov.png" />
-      <h1></h1>
-      <p>
-        For a guide and recipes on how to configure / customize this project,<br />
-        check out the
-        <a href="https://cli.vuejs.org" target="_blank">vue-cli documentation</a>.
-      </p>
-      <p>Votre recherche : {{ movieName }}</p>
-      <input id="search_bar" v-model="movieName" placeholder="Rentrez le nom d'un film" />
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <h1>Notre super site de films</h1>
+    <input
+      v-model="movieName"
+      @keyup.enter="fetchMovies"
+      placeholder="Rentrez le nom d'un film"
+    />
+    <div>
+      Watch a specific genre:
+      <Genre v-for="genre in genres" :movieProp="genre" :key="genre.id" />
     </div>
+    <br /><br />
     <div class="movies">
-      <Movie v-for="movie in movies" :movieProp="movie" />
+      <Movie v-for="movie in movies" :movieProp="movie" :key="movie.id" />
     </div>
   </div>
 </template>
@@ -20,6 +21,7 @@
 <script>
 import axios from "axios";
 import Movie from "@/components/Movie.vue";
+import Genre from "@/components/Genre.vue";
 
 export default {
   name: "Home",
@@ -27,10 +29,30 @@ export default {
     return {
       movieName: "",
       movies: [],
+      string: "",
+      genres: [],
     };
   },
   methods: {
     fetchMovies: function () {
+      if (this.movieName == "") {
+        this.string = `https://api.themoviedb.org/3/trending/movie/week?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&`;
+        console.log("check");
+      } else {
+        this.string =
+          `https://api.themoviedb.org/3/search/movie?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&query=` +
+          this.movieName;
+      }
+      axios
+        .get(this.string)
+        .then((response) => {
+          this.movies = JSON.parse(JSON.stringify(response.data.results));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    fetchGenre: function () {
       axios
         .get(`http://localhost:3000/movies/`)
         .then((response) => {
@@ -40,12 +62,16 @@ export default {
         .catch((error) => {
           console.error(error);
         });
+      console.log(this.genres);
+      console.log("tableau genre");
+      console.log(this.genres);
     },
   },
   mounted: function () {
     this.fetchMovies();
+    this.fetchGenre();
   },
-  components: { Movie },
+  components: { Movie, Genre },
 };
 </script>
 

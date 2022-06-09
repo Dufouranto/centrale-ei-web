@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 // import Counter from "../views/Counter.vue";
 import Users from "../views/Users.vue";
 import About from "../views/About.vue";
+import Genre from "../views/Genre.vue";
 
 const routes = [
   {
