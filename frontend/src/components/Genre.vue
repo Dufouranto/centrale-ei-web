@@ -30,4 +30,9 @@ export default {
 li.pointer {
   cursor: pointer;
 }
+
+button {
+  padding: 3px;
+  margin: 5px;
+}
 </style>

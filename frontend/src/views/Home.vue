@@ -8,7 +8,7 @@
       @keyup.enter="fetchMovies"
       placeholder="Rentrez le nom d'un film"
     />
-    <div>
+    <div class="genre">
       <br />
       <Genre v-for="genre in genres" :movieProp="genre" :key="genre.id" />
     </div>
@@ -106,6 +106,7 @@ a {
   padding: 15px 5px 0 15px;
   box-shadow: 0px 0px 20px 0 rgba(0, 0, 0, 0.5),
     0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 25px;
   /* background-color: white; */
 }
 
@@ -114,5 +115,10 @@ a {
 }
 #search_bar {
   width: 300px;
+}
+
+.genre {
+  width: 75%;
+  margin: auto;
 }
 </style>
