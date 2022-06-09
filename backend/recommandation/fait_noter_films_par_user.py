@@ -21,7 +21,7 @@ nb_movies = len(list_movies_id)
 for userId in users["_id"]:
     for i in range(10):
         p = randint(0, nb_movies - 1)
-        note = randint(0, 5)
+        note = randint(0, 10)
         movieId = list_movies_id[p]
         url = "http://localhost:3000/users/" + str(userId) + "/" + str(movieId)
         req.post(url, None, {"mark": note})
