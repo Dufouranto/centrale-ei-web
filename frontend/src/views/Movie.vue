@@ -10,31 +10,20 @@
       :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
     />
     <h1>{{ this.movie.title }}</h1>
-    Genre:
-    <Genre v-for="genre in movie.genres" :movieProp="genre" :key="genre.id" />
-    <br /><br />
+    <Genre v-for="genre in movie.genres" :movieProp="genre" :key="genre.id" /> •
+    &nbsp; {{ min_to_hours(this.movie.runtime) }} <br /><br />
     Rating : {{ this.movie.vote_average }}/10 <br /><br />
     Your mark:
-    <form action="/action_page.php" method="get">
-      <input
-        type="range"
-        name="amountRange"
-        min="0"
-        max="10"
-        value="0"
-        oninput="this.form.amountInput.value=this.value"
-      />
-      <input
-        type="number"
-        name="amountInput"
-        min="0"
-        max="10"
-        value="0"
-        oninput="this.form.amountRange.value=this.value"
-      />
-      <div>{{ this.value }}</div>
-      <input type="submit" value="Submit" />
-    </form>
+    <input
+      type="range"
+      class="form-control-range"
+      id="formControlRange"
+      v-model="value"
+      min="0"
+      max="10"
+    />
+    {{ value }}/10
+    <input type="submit" value="Submit" />
     <br /><br /><br /><br /><br /><br />
     Description: {{ this.movie.overview }}
   </div>
@@ -53,6 +42,9 @@ export default {
       link: "",
       genre: {},
       image: image,
+      value: 0,
+      hours: 0,
+      minuts: 0,
     };
   },
   methods: {
@@ -65,16 +57,22 @@ export default {
         .get(this.link)
         .then((response) => {
           this.movie = response.data;
-          console.log(this.movie.genres);
-          console.log(this.movie.genres[0].name);
+          console.log(this.movie);
         })
         .catch((error) => {
           console.error(error);
         });
     },
+    min_to_hours: function (int) {
+      this.minuts = int % 60;
+      this.hours = (int - this.minuts) / 60;
+      console.log(this.movie);
+      return this.hours + "h" + this.minuts;
+    },
   },
   mounted: function () {
     this.fetchMovie(this.$route.params.id);
+    this.min_to_hours();
   },
   components: { Genre },
 };
