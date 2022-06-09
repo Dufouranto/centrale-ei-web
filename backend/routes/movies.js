@@ -8,7 +8,6 @@ module.exports = router;
 router.get("/", async function (req, res) {
   // find each film, selecting the `title` field
   const listFilm = await MovieModel.find({}, "title poster_path");
-  console.log(req.params.search);
   res.send(listFilm);
 });
 
