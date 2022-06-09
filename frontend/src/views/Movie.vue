@@ -9,13 +9,12 @@
       class="image"
       :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
     />
-    <img v-else class="image" src="" />
     <h1>{{ this.movie.title }}</h1>
     Genre:
     <Genre v-for="genre in movie.genres" :movieProp="genre" :key="genre.id" />
+    <br /><br />
+    Rating : {{ this.movie.vote_average }}/10
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    Movie ID of {{ this.movie.title }} is {{ $route.params.id }}
-    <br /><br /><br />
     Description: {{ this.movie.overview }}
   </div>
 </template>
@@ -23,6 +22,7 @@
 <script>
 import axios from "axios";
 import Genre from "@/components/Genre.vue";
+import image from "./no poster.png";
 
 export default {
   name: "MoviePage",
@@ -31,6 +31,7 @@ export default {
       movie: {},
       link: "",
       genre: {},
+      image: image,
     };
   },
   methods: {
