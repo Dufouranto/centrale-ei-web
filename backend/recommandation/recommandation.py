@@ -120,6 +120,7 @@ def recommandation_simple(user_id):
     return None
 
 
+recommandation_similar()
 recommandation_simple(15845)
 
 # GET/movie/{movie_id}/similar
