@@ -7,6 +7,10 @@
       @keyup.enter="fetchMovies"
       placeholder="Rentrez le nom d'un film"
     />
+    <div>
+      Watch a specific genre:
+      <Genre v-for="genre in genres" :movieProp="genre" :key="genre.id" />
+    </div>
     <br /><br />
     <div class="movies">
       <Movie v-for="movie in movies" :movieProp="movie" :key="movie.id" />
@@ -17,6 +21,7 @@
 <script>
 import axios from "axios";
 import Movie from "@/components/Movie.vue";
+import Genre from "@/components/Genre.vue";
 
 export default {
   name: "Home",
@@ -25,6 +30,7 @@ export default {
       movieName: "",
       movies: [],
       string: "",
+      genres: [],
     };
   },
   methods: {
@@ -40,18 +46,33 @@ export default {
       axios
         .get(this.string)
         .then((response) => {
-          console.log(response);
-          this.movies = response.data.results;
+          this.movies = JSON.parse(JSON.stringify(response.data.results));
         })
         .catch((error) => {
           console.error(error);
         });
     },
+    fetchGenre: function () {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/genre/movie/list?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&`
+        )
+        .then((response) => {
+          this.genres = JSON.parse(JSON.stringify(response));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      console.log(this.genres);
+      console.log("tableau genre");
+      console.log(this.genres);
+    },
   },
   mounted: function () {
     this.fetchMovies();
+    this.fetchGenre();
   },
-  components: { Movie },
+  components: { Movie, Genre },
 };
 </script>
 

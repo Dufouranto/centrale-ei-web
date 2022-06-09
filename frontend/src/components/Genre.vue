@@ -1,6 +1,6 @@
 <template>
   <router-link :to="`/genre/${movieProp.id}`">
-    {{ movieProp.name }}
+    {{ movieProp.name }} salut
   </router-link>
   &nbsp
 </template>
@@ -13,8 +13,12 @@ export default {
 
   methods: {
     myMethod() {
-      console.log("check");
+      console.log("movieProp");
+      console.log(this.movieProp);
     },
+  },
+  mounted: function () {
+    this.myMethod();
   },
 };
 </script>

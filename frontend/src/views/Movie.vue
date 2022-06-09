@@ -13,8 +13,29 @@
     Genre:
     <Genre v-for="genre in movie.genres" :movieProp="genre" :key="genre.id" />
     <br /><br />
-    Rating : {{ this.movie.vote_average }}/10
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    Rating : {{ this.movie.vote_average }}/10 <br /><br />
+    Your mark:
+    <form action="/action_page.php" method="get">
+      <input
+        type="range"
+        name="amountRange"
+        min="0"
+        max="10"
+        value="0"
+        oninput="this.form.amountInput.value=this.value"
+      />
+      <input
+        type="number"
+        name="amountInput"
+        min="0"
+        max="10"
+        value="0"
+        oninput="this.form.amountRange.value=this.value"
+      />
+      <div>{{ this.value }}</div>
+      <input type="submit" value="Submit" />
+    </form>
+    <br /><br /><br /><br /><br /><br />
     Description: {{ this.movie.overview }}
   </div>
 </template>
