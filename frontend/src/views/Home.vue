@@ -14,7 +14,7 @@
     </div>
     <br /><br />
     <div class="movies">
-      <Movie v-for="movie in movies" :movieProp="movie" :key="movie.id" />
+      <Movie v-for="movie in movies" :movieProp="movie" :key="movie._id" />
     </div>
   </div>
 </template>
@@ -37,7 +37,7 @@ export default {
   methods: {
     fetchMovies: function () {
       if (this.movieName == "") {
-        this.string = `https://api.themoviedb.org/3/trending/movie/week?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&`;
+        this.string = `http://localhost:3000/movies`;
       } else {
         this.string =
           `https://api.themoviedb.org/3/search/movie?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&query=` +
@@ -46,7 +46,8 @@ export default {
       axios
         .get(this.string)
         .then((response) => {
-          this.movies = JSON.parse(JSON.stringify(response.data.results));
+          console.log(response.data);
+          this.movies = response.data;
         })
         .catch((error) => {
           console.error(error);
@@ -106,7 +107,7 @@ a {
   padding: 15px 5px 0 15px;
   box-shadow: 0px 0px 20px 0 rgba(0, 0, 0, 0.5),
     0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-top: 25px;
+  margin-top: 5px;
   /* background-color: white; */
 }
 
