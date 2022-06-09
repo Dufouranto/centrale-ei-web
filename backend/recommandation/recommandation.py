@@ -30,8 +30,9 @@
 """
 
 
-from operator import itemgetter
 from pymongo_test import get_database
+from sklearn import model_selection
+from sklearn.metrics.pairwise import pairwise_distances
 import numpy as np
 import pandas as pd
 
@@ -77,6 +78,30 @@ def recommandation(user_id):
     print("Number of users : ", nb_users)
     print("Number of movies : ", nb_items)
 
+    train_likes, test_likes = model_selection.train_test_split(likes, test_size=0.25)
+
+    movie_matrix = train_likes.pivot_table(
+        index="userId", columns="movieId", values="mark"
+    )
+    print("movie_matrix")
+    movie_matrix.head()
+
+    # Constucrion de la matrice contenant que les notes des différents films.
+    train_likes_matrix = np.zeros((nb_users, nb_items))
+    for line in train_likes.itertuples():
+        train_likes_matrix[line[1] - 1, line[2] - 1] = line[3]
+    print("train_likes_matrix")
+    print(train_likes_matrix)
+
+    # Construction de la matrice de test contenant que les notes des différents films.
+    test_likes_matrix = np.zeros((nb_users, nb_items))
+    for line in test_likes.itertuples():
+        test_likes_matrix[line[1] - 1, line[2] - 1] = line[3]
+
+    user_similarity = pairwise_distances(train_likes_matrix, metric="cosine")
+
+    print("user_similarity")
+    print(user_similarity)
     # Get all the ids of the films the user watched
 
     # Find the genre_ids of these films
