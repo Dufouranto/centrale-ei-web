@@ -99,5 +99,10 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  padding: 15px 5px 0 15px;
+  box-shadow: 0px 0px 20px 0 rgba(0, 0, 0, 0.5),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 5px;
+  /* background-color: white; */
 }
 </style>

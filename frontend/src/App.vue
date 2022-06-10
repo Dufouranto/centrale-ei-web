@@ -4,6 +4,7 @@
     <router-link class="nav-link" to="/users">Users</router-link> |
     <router-link class="nav-link" to="/about">About</router-link> |
     <router-link class="nav-link" to="/connexion">Connexion</router-link>
+    <router-link class="nav-link" to="/import">Add Movie</router-link>
   </div>
   <router-view />
 </template>

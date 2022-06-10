@@ -3,27 +3,29 @@
     <title>Test</title>
   </div>
   <p></p>
-  <div class="poster">
-    <img
-      v-if="movie.poster_path != null"
-      class="image"
-      :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
-    />
-    <h1>{{ this.movie.original_title }}</h1>
-    <Genre v-for="genre in movie.genres" :movieProp="genre" :key="genre.id" /> •
-    Your mark:
-    <input
-      type="range"
-      class="form-control-range"
-      id="formControlRange"
-      v-model="value"
-      min="0"
-      max="10"
-    />
-    {{ value }}/10
-    <input type="submit" value="Submit" />
-    <br /><br /><br /><br /><br /><br />
-    Description: {{ this.movie.overview }}
+  <div class="movies">
+    <div class="poster">
+      <img
+        v-if="movie.poster_path != null"
+        class="image"
+        :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
+      />
+      <h1>{{ this.movie.original_title }}</h1>
+      <Genre v-for="genre in movie.genres" :movieProp="genre" :key="genre.id" />
+      • Your mark:
+      <input
+        type="range"
+        class="form-control-range"
+        id="formControlRange"
+        v-model="value"
+        min="0"
+        max="10"
+      />
+      {{ value }}/10
+      <input type="submit" value="Submit" />
+      <br /><br /><br /><br /><br /><br />
+      Description: {{ this.movie.overview }}
+    </div>
   </div>
 </template>
 
@@ -89,5 +91,16 @@ export default {
   border-radius: 5px;
   background-color: rgb(22, 47, 67);
   padding: 1em;
+}
+
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 15px 5px 0 15px;
+  box-shadow: 0px 0px 20px 0 rgba(0, 0, 0, 0.5),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 5px;
+  /* background-color: white; */
 }
 </style>
