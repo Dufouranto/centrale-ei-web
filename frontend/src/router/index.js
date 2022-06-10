@@ -5,6 +5,7 @@ import Users from "../views/Users.vue";
 import About from "../views/About.vue";
 import Genre from "../views/Genre.vue";
 import Movie from "../views/Movie.vue";
+import Connexion from "../views/Connexion.vue";
 
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
     path: "/genre/:id",
     name: "Genre",
     component: Genre,
+  },
+  {
+    path: "/connexion",
+    name: "Connexion",
+    component: Connexion,
   },
 ];
 
