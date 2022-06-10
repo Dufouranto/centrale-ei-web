@@ -16,16 +16,16 @@
         name="password"
       />
     </form>
-    <button class="connexion-user-button" @click="connexionUser()">
-      Connexion
-    </button>
+    <!-- <router-link :to="`/users/${username._id}/movies`">
+      <button class="connexion-user-button" @click="connexion()">
+        connexion
+      </button>
+    </router-link> -->
     <div v-if="userConnexionError">{{ userConnexionError }}</div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "ConnexionUser",
   emits: ["connexionSuccessful"],
@@ -37,28 +37,6 @@ export default {
       },
       userConnexionError: "",
     };
-  },
-  methods: {
-    connexionUser: function () {
-      if (!this.$refs.connexionUserForm.checkValidity()) {
-        this.$refs.connexionUserForm.reportValidity();
-        return;
-      }
-
-      axios
-        .get(`${process.env.VUE_APP_BACKEND_BASE_URL}/id/movies`, this.user)
-        .then(() => {
-          this.$emit("connexionSuccessful");
-          this.user = {
-            username: "",
-            password: "",
-          };
-        })
-        .catch((error) => {
-          this.userConnexionError = "An error occured while connexion.";
-          console.error(error);
-        });
-    },
   },
 };
 </script>
