@@ -121,5 +121,3 @@ a {
   margin: auto;
 }
 </style>
-
-<!-- comment -->

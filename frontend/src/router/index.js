@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 // import Counter from "../views/Counter.vue";
 import Users from "../views/Users.vue";
-import About from "../views/About.vue";
+import Import from "../views/Import.vue";
 import Genre from "../views/Genre.vue";
 import Movie from "../views/Movie.vue";
 
@@ -18,9 +18,9 @@ const routes = [
     component: Users,
   },
   {
-    path: "/about",
-    name: "About",
-    component: About,
+    path: "/import",
+    name: "Import",
+    component: Import,
   },
   {
     path: "/movie/:id",
