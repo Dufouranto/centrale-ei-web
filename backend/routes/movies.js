@@ -1,3 +1,4 @@
+const { query } = require("express");
 const express = require("express");
 const MovieModel = require("../models/movies");
 const router = express.Router();
@@ -6,9 +7,35 @@ module.exports = router;
 
 //List all the movies
 router.get("/", async function (req, res) {
-  // find each film, selecting the `title` field
+  let query = {};
+  if (req.query.q) {
+    query = {
+      $text: {
+        $search: req.query.q,
+        $language: "english",
+        $diacriticSensitive: true,
+      },
+    };
+  }
   const listFilm = await MovieModel.find(
-    {},
+    query,
+    "original_title poster_path release_date"
+  );
+  res.send(listFilm);
+});
+
+router.get("/search/", async function (req, res) {
+  // find each film, selecting the `title` field
+  console.log(req.query);
+  const query = {
+    $text: {
+      $search: req.query.q,
+      $language: "english",
+      $diacriticSensitive: true,
+    },
+  };
+  const listFilm = await MovieModel.find(
+    query,
     "original_title poster_path release_date"
   );
   res.send(listFilm);

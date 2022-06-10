@@ -10,7 +10,7 @@ const mongoose = require("mongoose");
 
 const MovieSchema = new mongoose.Schema(
   {
-    original_title: { type: String, required: true },
+    original_title: { type: String, required: true, text:true },
     overview: { type: String },
     genres: { type: Array },
     release_date: { type: String },
