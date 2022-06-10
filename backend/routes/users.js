@@ -17,7 +17,7 @@ router.get("/:id/movies", async function (req, res) {
   const user = await RecommandationModel.find({ userId: req.params.id })
     .populate("movieId")
     .sort({ score: -1 });
-  res.send(user);
+  res.send(user.map( (movie) => {return movie.movieId;}));
 });
 
 //Add a like (a mark between 0 and 5, 0 for dislike)

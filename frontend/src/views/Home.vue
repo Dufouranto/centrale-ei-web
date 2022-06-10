@@ -37,7 +37,11 @@ export default {
   methods: {
     fetchMovies: function (id) {
       if (this.movieName == "") {
-        this.string = `http://localhost:3000/users/${id}/movies`;
+        if (id) {
+          this.string = `http://localhost:3000/users/${id}/movies`;
+        } else {
+          this.string = "http://localhost:3000/movies";
+        }
       } else {
         this.string = `http://localhost:3000/movies?q=${this.movieName}`;
       }
@@ -45,10 +49,7 @@ export default {
         .get(this.string)
         .then((response) => {
           console.log(response.data);
-          this.movies = response.data.map((movie) => {
-            return movie.movieId;
-          });
-          console.log(this.movies)
+          this.movies = response.data;
         })
         .catch((error) => {
           console.error(error);
