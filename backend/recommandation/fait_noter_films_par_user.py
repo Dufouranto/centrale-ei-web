@@ -19,7 +19,8 @@ list_movies_id = movies["_id"]
 nb_movies = len(list_movies_id)
 
 for userId in users["_id"]:
-    for i in range(18):
+    k = randint(10, 20)
+    for i in range(k):
         p = randint(0, nb_movies - 1)
         note = randint(0, 10)
         movieId = list_movies_id[p]

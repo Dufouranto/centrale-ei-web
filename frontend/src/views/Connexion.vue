@@ -17,7 +17,7 @@
       />
     </form>
     <button class="connexion-user-button" @click="connexionUser()">
-      Connexion user
+      Connexion
     </button>
     <div v-if="userConnexionError">{{ userConnexionError }}</div>
   </div>
@@ -63,22 +63,43 @@ export default {
 };
 </script>
 <style scoped>
-.add-user-title {
-  margin-bottom: 10px;
+#container {
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 10%;
+}
+/* Bordered form */
+form {
+  width: 100%;
+  padding: 30px;
+  border: 1px solid #f1f1f1;
+  background: #fff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+#connexion-user-form-container h1 {
+  width: 38%;
+  margin: 0 auto;
+  padding-bottom: 10px;
 }
 
-.add-user-form-container {
-  display: flex;
-  margin-bottom: 20px;
+/* Full-width inputs */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
-.add-user-input {
-  margin-right: 10px;
-  padding: 5px;
-}
-
-.add-user-button {
+/* Set a style for all buttons */
+input[type="submit"] {
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
   cursor: pointer;
-  padding: 5px;
+  width: 100%;
 }
 </style>
