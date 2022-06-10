@@ -6,12 +6,11 @@
         :src="`https://image.tmdb.org/t/p/w500${movieProp.poster_path}`"
       />
     </router-link>
-    <div>{{ movieProp.title }}</div>
+    <div>{{ movieProp.original_title }}</div>
     <div></div>
-    <!-- <div style="font-size: x-small">
-      {{ ConvertDate(movieProp.release_date) }} -
-      {{ movieProp.vote_average }}/10
-    </div> -->
+    <div style="font-size: x-small">
+      - {{ ConvertDate(movieProp.release_date) }} -
+    </div>
   </div>
 </template>
 

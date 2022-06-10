@@ -9,10 +9,8 @@
       class="image"
       :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
     />
-    <h1>{{ this.movie.title }}</h1>
+    <h1>{{ this.movie.original_title }}</h1>
     <Genre v-for="genre in movie.genres" :movieProp="genre" :key="genre.id" /> •
-    &nbsp; {{ min_to_hours(this.movie.runtime) }} <br /><br />
-    Rating : {{ this.movie.vote_average }}/10 <br /><br />
     Your mark:
     <input
       type="range"
@@ -32,7 +30,6 @@
 <script>
 import axios from "axios";
 import Genre from "@/components/Genre.vue";
-import image from "./no poster.png";
 
 export default {
   name: "MoviePage",
@@ -41,7 +38,7 @@ export default {
       movie: {},
       link: "",
       genre: {},
-      image: image,
+      // image: image,
       value: 0,
       hours: 0,
       minuts: 0,
@@ -49,10 +46,7 @@ export default {
   },
   methods: {
     fetchMovie: function (id) {
-      this.link =
-        "https://api.themoviedb.org/3/movie/" +
-        id +
-        "?api_key=a0a7e40dc8162ed7e37aa2fc97db5654";
+      this.link = `http://localhost:3000/movies/${id}`;
       axios
         .get(this.link)
         .then((response) => {
