@@ -32,6 +32,11 @@ const routes = [
     name: "Genre",
     component: Genre,
   },
+  {
+    path: "/user/:id",
+    name: "Genre",
+    component: Home,
+  }
 ];
 
 const router = createRouter({

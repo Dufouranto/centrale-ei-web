@@ -35,9 +35,9 @@ export default {
     };
   },
   methods: {
-    fetchMovies: function () {
+    fetchMovies: function (id) {
       if (this.movieName == "") {
-        this.string = `http://localhost:3000/movies`;
+        this.string = `http://localhost:3000/users/${id}/movies`;
       } else {
         this.string = `http://localhost:3000/movies?q=${this.movieName}`;
       }
@@ -45,7 +45,10 @@ export default {
         .get(this.string)
         .then((response) => {
           console.log(response.data);
-          this.movies = response.data;
+          this.movies = response.data.map((movie) => {
+            return movie.movieId;
+          });
+          console.log(this.movies)
         })
         .catch((error) => {
           console.error(error);
@@ -66,7 +69,7 @@ export default {
     },
   },
   mounted: function () {
-    this.fetchMovies();
+    this.fetchMovies(this.$route.params.id);
     this.fetchGenre();
   },
   components: { Movie, Genre },
