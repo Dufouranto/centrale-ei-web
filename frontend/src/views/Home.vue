@@ -39,9 +39,7 @@ export default {
       if (this.movieName == "") {
         this.string = `http://localhost:3000/movies`;
       } else {
-        this.string =
-          `https://api.themoviedb.org/3/search/movie?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&query=` +
-          this.movieName;
+        this.string = `http://localhost:3000/movies?q=${this.movieName}`;
       }
       axios
         .get(this.string)
