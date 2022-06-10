@@ -2,7 +2,7 @@
   <div class="nav">
     <router-link class="nav-link" to="/">Home</router-link> |
     <router-link class="nav-link" to="/users">Users</router-link> |
-    <router-link class="nav-link" to="/import">Import</router-link>
+    <router-link class="nav-link" to="/import">Add Movie</router-link>
   </div>
   <router-view />
 </template>

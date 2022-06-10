@@ -19,7 +19,7 @@ const routes = [
   },
   {
     path: "/import",
-    name: "Import",
+    name: "Add Movie",
     component: Import,
   },
   {
