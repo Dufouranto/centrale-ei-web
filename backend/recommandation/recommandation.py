@@ -85,7 +85,7 @@ def recommandation_similar():
     print("user_similarity")
     print(user_similarity)
 
-    return train_likes_matrix, user_similarity
+    return train_likes_matrix, user_similarity, movie_matrix
 
 
 def predict(ratings, similarity, type="user"):
@@ -102,6 +102,8 @@ def predict(ratings, similarity, type="user"):
         )
     elif type == "item":
         pred = ratings.dot(similarity) / np.array([np.abs(similarity).sum(axis=1)])
+
+    print(pred)
     return pred
 
 
@@ -136,7 +138,21 @@ def predict(ratings, similarity, type="user"):
 """
 
 
-ratings, similarity = recommandation_similar()
+def rempli_table_recommandation(matricePred, movie_matrix):
+    db = get_database()
+    db.recommandations.drop()
+    collection_recommandations = db["recommandations"]
+    for i in range(len(matricePred)):
+        for j in range(len(matricePred[0])):
+            score = matricePred[i][j]
+            idUser = movie_matrix.index[i]
+            idMovie = movie_matrix.columns[j]
+            collection_recommandations.insert_one(
+                {"userId": idUser, "movieId": idMovie, "score": score}
+            )
+
+
+ratings, similarity, movie_matrix = recommandation_similar()
 pred = predict(ratings, similarity, type="user")
 
-print(pred)
+rempli_table_recommandation(pred, movie_matrix)
