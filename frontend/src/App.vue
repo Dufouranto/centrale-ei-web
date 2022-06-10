@@ -2,14 +2,15 @@
   <div class="nav">
     <router-link class="nav-link" to="/">Home</router-link> |
     <router-link class="nav-link" to="/users">Users</router-link> |
-    <router-link class="nav-link" to="/about">About</router-link>
+    <router-link class="nav-link" to="/about">About</router-link> |
+    <router-link class="nav-link" to="/connexion">Connexion</router-link>
   </div>
   <router-view />
 </template>
 
 <style scoped>
 .nav {
-  font-family: 'Fredoka One', cursive;
+  font-family: "Fredoka One", cursive;
   font-size: 32px;
   text-align: center;
   padding: 30px;

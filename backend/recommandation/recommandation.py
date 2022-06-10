@@ -35,7 +35,7 @@ def recommandation_similar():
     likes, movies, users = L
 
     nb_users = users.email.unique().shape[0]
-    nb_movies = movies.title.unique().shape[0]
+    nb_movies = movies.original_title.unique().shape[0]
 
     print("Number of users : ", nb_users)
     print("Number of movies : ", nb_movies)
@@ -85,9 +85,31 @@ def recommandation_similar():
     print("user_similarity")
     print(user_similarity)
 
+    return train_likes_matrix, user_similarity
+
+
+def predict(ratings, similarity, type="user"):
+
+    if type == "user":
+        print(len(ratings[1]))
+        mean_user_rating = ratings.mean(axis=1)
+        # You use np.newaxis so that mean_user_rating has same format as ratings
+        ratings_diff = ratings - mean_user_rating[:, np.newaxis]
+        pred = (
+            mean_user_rating[:, np.newaxis]
+            + similarity.dot(ratings_diff)
+            / np.array([np.abs(similarity).sum(axis=1)]).T
+        )
+    elif type == "item":
+        pred = ratings.dot(similarity) / np.array([np.abs(similarity).sum(axis=1)])
+    return pred
+
+
+"""
     dbname.recommandations.drop()
     collection_recommandations = dbname["recommandations"]
     collection_likes = dbname["likes"]
+
 
     for i in range(len(user_similarity)):
         user_index, score = get_indexes_max_value(user_similarity[i])
@@ -111,24 +133,10 @@ def recommandation_similar():
                 collection_recommandations.insert_one(
                     {"userId": idUser, "movieId": objId[0], "score": score}
                 )
+"""
 
 
-def recommandation_simple(user_id):
-    # Get all the ids of the films the user noted
+ratings, similarity = recommandation_similar()
+pred = predict(ratings, similarity, type="user")
 
-    dbname = get_database()
-
-    collection_likes = dbname["likes"]
-
-    movies_noted = collection_likes.find({"userId": user_id})
-
-    print(movies_noted)
-    # Find the genre_ids of these films
-
-    # Sort the genres according to there occurences
-
-    # Return a list of film ids for each genre
-    return None
-
-
-recommandation_similar()
+print(pred)

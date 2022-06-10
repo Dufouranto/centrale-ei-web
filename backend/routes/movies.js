@@ -19,7 +19,7 @@ router.get("/", async function (req, res) {
   }
   const listFilm = await MovieModel.find(
     query,
-    "original_title poster_path release_date"
+    "original_title poster_path release_date genres"
   );
   res.send(listFilm);
 });
